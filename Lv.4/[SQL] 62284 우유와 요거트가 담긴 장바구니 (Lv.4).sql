@@ -1,0 +1,7 @@
+-- https://programmers.co.kr/learn/courses/30/lessons/62284
+
+SELECT T1.CART_ID
+FROM CART_PRODUCTS AS T1, CART_PRODUCTS AS T2
+WHERE T1.CART_ID = T2.CART_ID AND
+      T1.NAME = "Milk" AND T2.NAME = "Yogurt"
+GROUP BY T1.CART_ID
