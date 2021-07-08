@@ -1,90 +1,51 @@
 // https://programmers.co.kr/learn/courses/30/lessons/81301
 
 #include <string>
+#include <vector>
+#include <cctype>
 
 using namespace std;
 
 int solution(string s)
 {
+    const vector<string> digit =
+    {
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine"
+    };
+    
     string x = "";
     
-    for (int i = 0; i < (int)s.size(); )
+    int i = 0;
+    int n = (int)s.size();
+    
+    while (i < n)
     {
-        if ('0' <= s[i] && s[i] <= '9')
+        if (isdigit(s[i]))
         {
             x.push_back(s[i]);
-            i++;
+            ++i;
         }
-            
+        
         else
         {
-            if (s[i] == 'z' && s[i + 3] == 'o')
+            for (int j = 0; j < 10; ++j)
             {
-                x.push_back('0');
-                i += 4;
-            }
-            
-            else if (s[i] == 'o' && s[i + 2] == 'e')
-            {
-                x.push_back('1');
-                i += 3;
-            }
-            
-            else if (s[i] == 't')
-            {
-                if (s[i + 2] == 'o')
+                if (s.substr(i, (int)digit[j].size()) == digit[j])
                 {
-                    x.push_back('2');
-                    i += 3;
+                    x.push_back(j + '0');
+                    i += (int)digit[j].size();
+                    
+                    break;
                 }
-                
-                else if (s[i + 4] == 'e')
-                {
-                    x.push_back('3');
-                    i += 5;
-                }
-            }
-            
-            else if (s[i] == 'f')
-            {
-                if (s[i + 3] == 'r')
-                {
-                    x.push_back('4');
-                    i += 4;
-                }
-                
-                if (s[i + 3] == 'e')
-                {
-                    x.push_back('5');
-                    i += 4;
-                }
-            }
-            
-            else if (s[i] == 's')
-            {
-                if (s[i + 2] == 'x')
-                {
-                    x.push_back('6');
-                    i += 3;
-                }
-                
-                if (s[i + 4] == 'n')
-                {
-                    x.push_back('7');
-                    i += 5;
-                }
-            }
-            
-            else if (s[i] == 'e' && s[i + 4] == 't')
-            {
-                x.push_back('8');
-                i += 5;
-            }
-            
-            else if (s[i] == 'n' && s[i + 3] == 'e')
-            {
-                x.push_back('9');
-                i += 4;
             }
         }
     }
